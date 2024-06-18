@@ -1,0 +1,230 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <section id="home-section" class="hero">
+		  <div class="home-slider owl-carousel">
+	      <div class="slider-item" style="background-image: url({{content.photoBanerMainOne.url}});">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-md-12 ftco-animate text-center">
+	              <h1 class="mb-2">{{content.textBanerMain}}</h1>
+	              <h2 class="subheading mb-4">Мы доставляем органические овощи и фрукты</h2>
+	              <p><a href="{% url "goods:catalog" %}" class="btn btn-primary">Магазин</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="slider-item" style="background-image: url({{content.photoBanerMainTwo.url}});">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-sm-12 ftco-animate text-center">
+	              <h1 class="mb-2">{{content.textBanerMain}}</h1>
+	              <h2 class="subheading mb-4">Мы доставляем органические овощи и фрукты</h2>
+	              <p><a href="{% url "goods:catalog" %}" class="btn btn-primary">Магазин</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+    </section>
+
+    <section class="ftco-section">
+			<div class="container">
+				<div class="row no-gutters ftco-services">
+          <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services mb-md-0 mb-4">
+              <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
+            		<span class="flaticon-shipped"></span>
+              </div>
+               <div class="media-body">
+                <h3 class="heading">ДОСТАВКА</h3>
+                <span>Доставка по всему анапскому району</span>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services mb-md-0 mb-4">
+              <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
+            		<span class="flaticon-diet"></span>
+              </div> 
+              <div class="media-body">
+                <h3 class="heading">Всегда Свежий</h3>
+                <span>Продукт хорошо пакет</span>
+              </div>
+            </div>    
+          </div>
+          <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services mb-md-0 mb-4">
+              <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
+            		<span class="flaticon-award"></span>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Высшее качество</h3>
+                <span>Качественная продукция</span>
+              </div>
+            </div>      
+          </div>
+		  
+          <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services mb-md-0 mb-4">
+              <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
+            		<span class="flaticon-customer-service"></span>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Поддерживать</h3>
+                <span>Круглосуточная поддержка</span>
+              </div>
+            </div>      
+          </div>
+        </div>
+			</div>
+		</section>
+
+		<section class="ftco-section ftco-category ftco-no-pt">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-6 order-md-last align-items-stretch d-flex">
+								<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url({% static 'images/category.jpg' %});">
+									<div class="text text-center">
+										<h2>Simiram</h2>
+										<p>Мы готовим так что бы вы возращялись</p>
+										<p><a href="{% url "goods:catalog" %}" class="btn btn-primary">Магазин</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+
+								
+								<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({% if contentCategory.0.photoCategory %}{{ contentCategory.0.photoCategory.url }}{% else %}{% static "img/no_image.png" %}{% endif %});">
+									<div class="text px-3 py-1">
+										<h2 class="mb-0"><a href="{{contentCategory.0.category.get_absolute_url}}">{{contentCategory.0.category.name}}</a></h2>
+									</div>
+								</div>
+								
+								<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({% if contentCategory.1.photoCategory %}{{ contentCategory.1.photoCategory.url }}{% else %}{% static "img/no_image.png" %}{% endif %});">
+									<div class="text px-3 py-1">
+										<h2 class="mb-0"><a href="{{contentCategory.1.category.get_absolute_url}}">{{contentCategory.1.category.name}}</a></h2>
+									</div>
+								</div> 
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+
+						<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({% if contentCategory.2.photoCategory %}{{ contentCategory.2.photoCategory.url }}{% else %}{% static "img/no_image.png" %}{% endif %});">
+							<div class="text px-3 py-1">
+								<h2 class="mb-0"><a href="{{contentCategory.2.category.get_absolute_url}}">{{contentCategory.2.category.name}}</a></h2>
+							</div>		
+						</div>
+						<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({% if contentCategory.3.photoCategory %}{{ contentCategory.3.photoCategory.url }}{% else %}{% static "img/no_image.png" %}{% endif %});">
+							<div class="text px-3 py-1">
+								<h2 class="mb-0"><a href="{{contentCategory.3.category.get_absolute_url}}">{{contentCategory.3.category.name}}</a></h2>
+							</div>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</section>
+
+    <section class="ftco-section">
+    	<div class="container">
+				<div class="row justify-content-center mb-3 pb-3">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<span class="subheading">Simiram</span>
+            <h2 class="mb-4">Наши продукты</h2>
+            <p>Далеко-далеко, за словом горы, далеко от стран Вокалия и Согласная.</p>
+          </div>
+        </div>   		
+    	</div>
+    	<div class="container">
+    		<div class="row">
+
+				{% comment %} Продукт {% endcomment %}
+				{% for c in paginator %}
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="{{c.get_absolute_url}}" class="img-prod"><img class="img-fluid" src="{% if c.image %}{{ c.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" 
+							alt="Фото продукта">
+    						
+    					</a>
+    					<div class="text py-3 pb-4 px-3 text-center">
+    						<h3><a href="{{c.get_absolute_url}}">{{c.name}}</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span class="price-sale">{{c.price}}</span></p>
+		    					</div>
+	    					</div>
+	    					{% comment %} <div class="bottom-area d-flex px-3">
+	    						<div class="m-auto d-flex">
+	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    								<span><i class="ion-ios-menu"></i></span>
+	    							</a>
+	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+	    								<span><i class="ion-ios-cart"></i></span>
+	    							</a>
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    								<span><i class="ion-ios-heart"></i></span>
+	    							</a>
+    							</div>
+    						</div> {% endcomment %}
+    					</div>
+    				</div>
+    			</div>
+    			{% endfor %}
+
+    		</div>
+    	</div>
+    </section>
+		
+		<section class="ftco-section img" style="background-image: url({{content.banerDeliveryClubIndex.url}});">
+    	<div class="container">
+				<div class="row justify-content-end">
+          <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
+          	<span class="subheading">Так же вы можете заказать Delivery Club</span>
+            <h2 class="mb-4">Наши продукты</h2>
+            <p>Вы можете заказать доставку в Delivery Club прямо сейчас</p>
+            <h3><a href="{{content.urlDeliveryClub}}">Перейти в Delivery Club</a></h3>
+           
+            
+          </div>
+        </div>   		
+    	</div>
+    </section>
+
+    
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+      <div class="container py-4">
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-6">
+          	<h2 style="font-size: 22px;" class="mb-0">Подписывайтесь на нашу новостную рассылку</h2>
+          	<span>Получайте по электронной почте обновления о наших последних магазинах и специальных предложениях</span>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <form action="#" class="subscribe-form">
+              <div class="form-group d-flex">
+                <input type="text" class="form-control" placeholder="Введите адрес электронной почты">
+                <input type="submit" value="Подписаться" class="submit px-3">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+	{% endblock content %}

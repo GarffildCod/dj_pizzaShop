@@ -1,0 +1,155 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-7 ftco-animate">
+
+
+        <form action='{% url "orders:order_create" %}' class="billing-form" method='post' >
+          {% csrf_token %}
+          <h4 class="mb-4 billing-heading">Данные заказа</h4>
+          <div class="row align-items-end">
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="id_first_name">Имя*</label>
+                <input id="id_first_name" type="text" class="form-control" placeholder="Имя" name='first_name'>
+                    </div>
+                    {% if form.first_name.errors %}
+                        <p>{{form.first_name.errors}}</p>
+                    {% endif %}
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label for="id_last_name">Фамилия*</label>
+                <input id="id_last_name" type="text" class="form-control" placeholder="Фамилия" name='last_name'>
+                {% if form.last_name.errors %}
+                  <p>{{form.last_name.errors}}</p>
+                {% endif %}
+              </div>
+            </div>
+          
+
+
+
+          <div class="w-100"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="id_address_street">Адрес Город/Улица</label>
+              <input id="id_address_street" name='address_street' type="text" 
+              class="form-control" placeholder="Анапа садовая 12">
+            </div>
+                  {% if form.address_street.errors %}
+                  <p>{{form.address_street.errors}}</p>
+                  {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="id_address_house">Адрес Квартира/Подъезд</label>
+                  <input id="id_address_house" name='address_house' type="text" class="form-control" 
+                  placeholder="Квартира 12 подъезд 1">
+            </div>
+                  {% if form.address_house.errors %}
+                  <p>{{form.address_house.errors}}</p>
+                  {% endif %}
+          </div>
+
+          
+
+        <div class="w-100"></div>
+          <div class="col-md-12">
+          <div class="form-group">
+              <label for="id_phone">Номер телефона*</label>
+            <input id="id_phone" name='phone' type="text" 
+            class="form-control" placeholder="+79180000000"
+            required>
+          </div>
+            {% if form.phone.errors %}
+              <p>{{form.phone.errors}}</p>
+            {% endif %}
+        </div>
+
+
+
+
+            <div class="col-md-12">
+              <div class="cart-detail p-3 p-md-4">
+                <h3 class="billing-heading mb-4">Способ оплаты</h3>
+                
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="radio">
+                       <label for="id_payment"><input type="radio" name="payment" class="mr-2" id="id_payment" value="C">Наличными курьеру</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="radio">
+                       <label for="id_payment"><input type="radio" name="payment" class="mr-2" id="id_payment" value="M">Картой курьеру</label>
+                    </div>
+                    {% if form.payment_on_get.errors %}
+											    <p>{{form.payment_on_get.errors}}</p>
+											{% endif %}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="checkbox">
+                       <label><input type="checkbox" value="" class="mr-2">Я прочитал и принимаю условия</label>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary py-3 px-4" type="submit">Оставить заказ</button>
+                {% comment %} <p><a href="#"class="btn btn-primary py-3 px-4">Оставить заказ</a></p> {% endcomment %}
+              </div>
+            </div>
+            
+            
+
+
+          </div>
+      </form><!-- END -->
+</div>
+  <div class="col-xl-5">
+        <div class="row mt-5 pt-3">
+          <div class="col-md-12 d-flex mb-5">
+            <div class="cart-detail cart-total p-3 p-md-4">
+              <h3 class="billing-heading mb-4">Корзина</h3>
+              
+              <p class="d-flex">
+                <span>Доставка</span>
+                <span>0.00 ₽</span>
+              </p>
+              
+              <hr>
+              <p class="d-flex total-price">
+                <span>Итого</span>
+                <span>{{ cart.get_total_price }} ₽</span>
+              </p>
+            </div>
+          </div>
+         
+        </div>
+      </div> <!-- .col-md-8 -->
+    </div>
+  </div>
+</section> <!-- .section -->
+
+
+
+{% endblock content %}

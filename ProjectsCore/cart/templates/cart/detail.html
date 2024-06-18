@@ -1,0 +1,154 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="hero-wrap hero-bread" style="background-image: url({% if content.banerLinkShop %}{{ content.banerLinkShop.url }}{% else %}{% static "img/no_image.png" %}{% endif %});">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url "main:index" %}">Вернутся на главную</a></span></p>
+          <h1 class="mb-0 bread">Корзина</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section ftco-cart">
+          <div class="container">
+              <div class="row">
+              <div class="col-md-12 ftco-animate">
+
+
+                  <div class="cart-list">
+
+
+
+                    {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                      <table class="table">
+                          <thead class="thead-primary">
+                            <tr class="text-center">
+                              <th>&nbsp;</th>
+                              <th>&nbsp;</th>
+                              <th>Product name</th>
+                              <th>Price</th>
+                              <th>Quantity</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              
+                              {% for item in cart %}
+                                {% with product=item.product %}
+                            <tr class="text-center">
+
+
+                              <td class="product-remove">
+                                    <form action="{% url "cart:cart_remove" product.id %}" method="post" >
+                                        {{ cart_product_form }}
+                                        {% csrf_token %}
+                                        <button type="submit" class="remove-button" >
+                                            <span class="ion-ios-close"></span>
+                                        </button>
+                                    </form> 
+                                </td>
+                              
+                        
+                            <td class="image-prod"><div class="img" style="background-image:url({% if product.image %}{{ product.image.url }}
+                                {% else %}{% static "img/no_image.png" %}{% endif %});"></div></td>
+                              <td class="product-name">
+                                  <h3>{{ product.name }}</h3>
+                                  <p>Далеко-далеко, за словом горы, далеко от стран</p>
+                              </td>
+                              
+                              <td class="price">{{ item.price }}₽</td>
+                              
+                                <td class="quantity">
+                                    <div class="input-group mb-8">
+                                        <form action="{% url "cart:cart_add" product.id %}" method="post" >
+                                            {% csrf_token %}
+                                            <div class="quantity-center">
+                                            {{ item.update_quantity_form.quantity }}
+                                            
+                                            <input type="submit" value="Изменить" class="btn">
+                                            {{ item.update_quantity_form.override }}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>  
+                                {% comment %} <input type="text" name="quantity" class="quantity form-control input-number" value="{{ item.quantity }}" min="1" max="20">  {% endcomment %}
+
+                                
+                              
+                              <td class="total">{{ item.total_price }}₽</td>
+                            </tr><!-- END TR-->
+                          </tbody>
+                          {% endwith %}
+                          {% endfor %}
+                        </table>
+
+                        
+                   
+                        </div>
+                        </div>
+                        </div>
+
+
+                        {% comment %} Секция итого {% endcomment %}
+          <div class="row justify-content-end">
+              <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                  <div class="cart-total mb-3">
+                      <h3>Заказ:</h3>
+                       
+                      <hr>
+                      <p class="d-flex total-price">
+                          <span>Итого:</span>
+                          <span>{{ cart.get_total_price }}₽</span>
+                      </p>
+                  </div>
+                  {% with total_items=cart|length %}
+                      {% if total_items > 0 %}
+                      <p><a href="{% url "orders:order_create" %}" class="btn btn-primary py-3 px-4">Заказать</a></p>
+                      {% else %}
+                      <p><a href="{% url "goods:catalog" %}" class="btn btn-primary py-3 px-4">Вернутся в магазин</a></p>
+                      {% endif %}
+                      {% endwith %}
+                  
+              </div>
+          </div>
+        </div>
+      </section>
+
+      {% else %}
+      <div class="text-center">
+          <h2>Ваша корзина пуста</h2>
+          <p><a href="{% url "goods:catalog" %}" class="btn btn-primary py-3 px-4">Вернутся в магазин</a></p>
+      </div>
+  {% endif %}
+  {% endwith %}
+
+      <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+    <div class="container py-4">
+      <div class="row d-flex justify-content-center py-5">
+        <div class="col-md-6">
+            <h2 style="font-size: 22px;" class="mb-0">Подписывайтесь на нашу новостную рассылку</h2>
+            <span>Получайте по электронной почте обновления о наших последних магазинах и специальных предложениях</span>
+        </div>
+        <div class="col-md-6 d-flex align-items-center">
+          <form action="#" class="subscribe-form">
+            <div class="form-group d-flex">
+              <input type="text" class="form-control" placeholder="Введите адрес электронной почты">
+              <input type="submit" value="Подписаться" class="submit px-3">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+	{% endblock content %}
